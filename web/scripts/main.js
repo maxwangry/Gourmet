@@ -21,12 +21,12 @@
         $('fav-btn').addEventListener('click', loadFavoriteRestaurants);
         $('recommend-btn').addEventListener('click', loadRecommendedRestaurants);
 
-        // validateSession();
+        validateSession();
 
-        onSessionValid({
+        /*        onSessionValid({
             user_id: '1111',
             name: 'John Smith'
-        });
+         });*/
     }
 
     /**
