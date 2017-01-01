@@ -19,9 +19,6 @@ import java.util.Set;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-/**
- * Created by Ruoyu Wang on 2016/11/17.
- */
 public class MongoDBConnection implements DBConnection {
 
     private static final int MAX_RECOMMENDED_RESTAURANTS = 10;

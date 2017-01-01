@@ -10,38 +10,6 @@ import java.util.List;
 
 public class Restaurant {
 
-    // * Performed data cleanup and purify from Yelp API.
-    public static String parseString(String str) {
-        return str.replace("\"", "\\\"").replace("/", " or ");
-    }
-
-    public static String jsonArrayToString(JSONArray array) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            for (int i = 0; i < array.length(); i++) {
-                String obj = (String) array.get(i);
-                sb.append(obj);
-                if (i != array.length() - 1) {
-                    sb.append(",");
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
-
-    public static JSONArray stringToJSONArray(String str) {
-        try {
-            return new JSONArray("[" + parseString(str) + "]");
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     private String businessId;
     private String name;
     private String categories;
@@ -53,7 +21,6 @@ public class Restaurant {
     private double longitude;
     private String imageUrl;
     private String url;
-
     public Restaurant(JSONObject object) {
         try {
             if (object != null) {
@@ -99,6 +66,38 @@ public class Restaurant {
         this.longitude = longitude;
         this.imageUrl = imageUrl;
         this.url = url;
+    }
+
+    // * Performed data cleanup and purify from Yelp API.
+    public static String parseString(String str) {
+        return str.replace("\"", "\\\"").replace("/", " or ");
+    }
+
+    public static String jsonArrayToString(JSONArray array) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                String obj = (String) array.get(i);
+                sb.append(obj);
+                if (i != array.length() - 1) {
+                    sb.append(",");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    public static JSONArray stringToJSONArray(String str) {
+        try {
+            return new JSONArray("[" + parseString(str) + "]");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public JSONObject toJSONObject() {

@@ -7,6 +7,16 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Gourmet" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/java-json.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/bson-3.0.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/scribe-1.3.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mongo-java-driver-3.0.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mongodb-driver-core-3.0.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-5.1.40-bin.jar" />
+          <element id="library" level="module" name="JUnit5" module-name="Gourmet" />
+          <element id="library" level="module" name="JUnit4" module-name="Gourmet" />
+        </element>
       </element>
     </root>
   </artifact>

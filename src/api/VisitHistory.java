@@ -17,14 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Ruoyu Wang on 2016/11/17.
- */
 @WebServlet("/history")
 public class VisitHistory extends HttpServlet {
 
     private static DBConnection connection = new MySQLDBConnection();
-//    private static DBConnection connection = new MongoDBConnection();
 
     public VisitHistory() {
         super();

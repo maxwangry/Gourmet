@@ -35,6 +35,32 @@ public class YelpAPI {
         this.accessToken = new Token(TOKEN, TOKEN_SECRET);
     }
 
+    /**
+     * Queries the Search API based on the command line arguments and takes the
+     * first result to query the Business API.
+     */
+    private static void queryAPI(YelpAPI yelpApi, double lat, double lon) {
+        String searchResponseJSON = yelpApi.searchForBusinessesByLocation(lat, lon);
+        JSONObject response = null;
+        try {
+            response = new JSONObject(searchResponseJSON);
+            JSONArray businesses = (JSONArray) response.get("businesses");
+            for (int i = 0; i < businesses.length(); i++) {
+                JSONObject business = (JSONObject) businesses.get(i);
+                System.out.println(business);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Main entry for sample Yelp API requests.
+     */
+    public static void main(String[] args) {
+        YelpAPI yelpApi = new YelpAPI();
+        queryAPI(yelpApi, 37.38, -122.08);
+    }
 
     /**
      * Creates and sends a request to the Search API by term and location.
@@ -49,7 +75,6 @@ public class YelpAPI {
         return sendRequestAndGetResponse(request);
     }
 
-
     /**
      * Sends an {@link OAuthRequest} and returns the {@link Response} body.
      */
@@ -58,35 +83,5 @@ public class YelpAPI {
         this.service.signRequest(this.accessToken, request);
         Response response = request.send();
         return response.getBody();
-    }
-
-
-    /**
-     * Queries the Search API based on the command line arguments and takes the
-     * first result to query the Business API.
-     */
-    private static void queryAPI(YelpAPI yelpApi, double lat, double lon) {
-        String searchResponseJSON = yelpApi.searchForBusinessesByLocation(lat,
-                lon);
-        JSONObject response = null;
-        try {
-            response = new JSONObject(searchResponseJSON);
-            JSONArray businesses = (JSONArray) response.get("businesses");
-            for (int i = 0; i < businesses.length(); i++) {
-                JSONObject business = (JSONObject) businesses.get(i);
-                System.out.println(business);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * Main entry for sample Yelp API requests.
-     */
-    public static void main(String[] args) {
-        YelpAPI yelpApi = new YelpAPI();
-        queryAPI(yelpApi, 37.38, -122.08);
     }
 }

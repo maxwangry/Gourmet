@@ -13,8 +13,8 @@ import java.util.Set;
 
 
 public class MySQLDBConnection implements DBConnection {
-    private Connection conn = null;
     private static final int MAX_RECOMMENDED_RESTAURANTS = 10;
+    private Connection conn = null;
 
     public MySQLDBConnection() {
         this(DBUtil.URL);
@@ -22,10 +22,8 @@ public class MySQLDBConnection implements DBConnection {
 
     public MySQLDBConnection(String url) {
         try {
-            // Forcing the class representing the MySQL driver to load and
-            // initialize.
-            // The newInstance() call is a work around for some broken Java
-            // implementations
+            // Forcing the class representing the MySQL driver to load and initialize.
+            // The newInstance() call is a work around for some broken Java implementations.
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection(url);
         } catch (Exception e) {
@@ -33,13 +31,13 @@ public class MySQLDBConnection implements DBConnection {
         }
     }
 
-
     @Override
     public void close() {
         if (conn != null) {
             try {
                 conn.close();
-            } catch (Exception e) { /* ignored */
+            } catch (Exception e) {
+                /* ignored */
             }
         }
     }
@@ -124,17 +122,21 @@ public class MySQLDBConnection implements DBConnection {
                 return null;
             }
 
-            Set<String> visitedRestaurants = getVisitedRestaurants(userId);//step 1
-            Set<String> allCategories = new HashSet<>();// why hashSet? //step 2
+            // Step 1:
+            Set<String> visitedRestaurants = getVisitedRestaurants(userId);
+            // Step 2:
+            Set<String> allCategories = new HashSet<>();
             for (String restaurant : visitedRestaurants) {
                 allCategories.addAll(getCategories(restaurant));
             }
-            Set<String> allRestaurants = new HashSet<>();//step 3
+            // Step 3:
+            Set<String> allRestaurants = new HashSet<>();
             for (String category : allCategories) {
                 Set<String> set = getBusinessId(category);
                 allRestaurants.addAll(set);
             }
-            Set<JSONObject> diff = new HashSet<>();//step 4
+            // Step 4:
+            Set<JSONObject> diff = new HashSet<>();
             int count = 0;
             for (String businessId : allRestaurants) {
                 // Perform filtering
@@ -203,7 +205,7 @@ public class MySQLDBConnection implements DBConnection {
                     api.searchForBusinessesByLocation(lat, lon));
             JSONArray array = (JSONArray) response.get("businesses");
 
-            List<JSONObject> list = new ArrayList<JSONObject>();
+            List<JSONObject> list = new ArrayList<>();
             Set<String> visited = getVisitedRestaurants(userId);
 
             for (int i = 0; i < array.length(); i++) {

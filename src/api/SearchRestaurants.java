@@ -12,14 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Created by Ruoyu Wang on 2016/11/17.
- */
 @WebServlet("/restaurants")
 public class SearchRestaurants extends HttpServlet {
 
     private static DBConnection connection = new MySQLDBConnection();
-//    private static DBConnection connection = new MongoDBConnection();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

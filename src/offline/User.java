@@ -38,7 +38,6 @@ public class User implements Comparable<User>{
 
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         return value != null ? value.equals(user.value) : user.value == null;
-
     }
 
     @Override

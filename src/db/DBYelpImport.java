@@ -5,9 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Ruoyu Wang on 2016/11/17.
- */
 public class DBYelpImport {
     public static void main(String[] args) {
         try {
